@@ -9,4 +9,8 @@
 # Desription
 In this application, you will start off with a set of inventory items and $100. You may sell your items or head to the marketplace, which you may navigate to using the menu bar, and buy items from other people. These items that are bought will go back into your inventory. Items that are sold will go into the marketplace.
 
+# Some images of the application
+
+<img width="1109" alt="Screen Shot 2021-04-30 at 3 50 14 AM" src="https://user-images.githubusercontent.com/67655719/116665019-39b7bb00-a967-11eb-93a7-58cf4a97b2b8.png">
+
 # Enjoy!
