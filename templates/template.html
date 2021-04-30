@@ -35,6 +35,13 @@
                 text-align: center;
             }
 
+            .upload-file {
+                border-radius: 25px;
+                border: 2px solid #6495ED;
+                padding: 20px;
+                width: 500px;
+                height: 150px;
+            }
         </style>
         
     </head>
@@ -54,19 +61,21 @@
 
         <div class="p-3 mb-2 bg-light text-dark">
 
-        <div class="hero-unit">
-            <h1>Balance: ${{balance}}.00</h1>
-        </div>
+            <div class="hero-unit">
+                <h1>Balance: ${{balance}}.00</h1>
+            </div>
 
-        <div class="flash">
-            {% set messages = get_flashed_messages() %}
-            {% for message in messages %}
-            <p>{{ message }}</p>
-            {% endfor %}
-        </div>
+            <br>
 
-        {% block body %}
-        {% endblock %}
+            <div class="flash">
+                {% set messages = get_flashed_messages() %}
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+
+            {% block body %}
+            {% endblock %}
         </div>
     </body>
 </html>

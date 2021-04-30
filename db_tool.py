@@ -6,7 +6,7 @@ def make_datebase():
     c = db.cursor()
 
     # create table of images
-    command = "CREATE TABLE images (image_id INTEGER PRIMARY KEY, filepath TEXT, user_id INTEGER, price FLOAT, quantity INTEGER);"
+    command = "CREATE TABLE images (image_id INTEGER PRIMARY KEY AUTOINCREMENT, filepath TEXT, user_id INTEGER, price FLOAT, quantity INTEGER);"
     db.execute(command)
 
     # create user table
@@ -38,17 +38,11 @@ def add_image(filepath, user_id, price, quantity):
     db = sqlite3.connect("app.db") 
     c = db.cursor()
 
-    command = "SELECT count(*) FROM images;"
-    for row in c.execute(command):
-        image_id = row[0]
-
-    command = "INSERT INTO images VALUES (%d, \"%s\", %d, %d, %d);" % (image_id, filepath, user_id, price, quantity)
+    command = "INSERT INTO images (filepath, user_id, price, quantity) VALUES (\"%s\", %d, %d, %d);" % (filepath, user_id, price, quantity)
     c.execute(command)
 
     db.commit()
     db.close()
-
-    return image_id
 
 # returns the price of an image
 def get_image_price(image_id):
@@ -68,6 +62,8 @@ def get_image_price(image_id):
 def get_image_quantity(image_id):
     db = sqlite3.connect("app.db")
     c = db.cursor()
+
+    quantity = 0
 
     command = "SELECT quantity FROM images WHERE images.image_id = %d;" % (image_id) 
     for row in c.execute(command):
@@ -201,6 +197,17 @@ def set_image_to_price(image_id, price):
     c = db.cursor()
 
     command = "UPDATE images SET price = %d WHERE image_id = %d;" % (price, image_id)
+    c.execute(command)
+
+    db.commit()
+    db.close()
+
+# remove image
+def remove_image(image_id):
+    db = sqlite3.connect("app.db")
+    c = db.cursor()
+
+    command = "DELETE FROM images WHERE image_id = %d" % (image_id)
     c.execute(command)
 
     db.commit()
