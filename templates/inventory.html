@@ -3,19 +3,17 @@
 {% block body %}
 
 <div class="row">
+    {% for item, values in inventory.items() %}
     <div class="column"> 
-        {% for item, values in inventory.items() %}
         <img src="{{ values['filepath'] }}" height="200" width="200">
-        <p>Inventory {{values['quantity']}}</p>
-        <p>Price {{values['price']}}</p>
+        <p>Price: ${{values['price']}}0</p>
         <form method="POST">
-            <label for="sellQuantity">Quantity:</label>
-            <input type="number" id="sellQuantity" name="sellQuantity"><br><br>
-            <input type="hidden" id="id" name="id" value="{{item}}">
-            <input type="submit" value="Sell">
+            <input type="hidden" id="sellQuantity" name="sellQuantity" value="1">
+            <input type="hidden" id="id" name="id" value="{{item}}">  
+            <button type="submit" class="btn btn-primary">Sell</button>
         </form> 
-        {% endfor %}
     </div>
+    {% endfor %}
 </div>
 
 {% endblock %}

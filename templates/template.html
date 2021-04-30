@@ -9,6 +9,31 @@
             div.imagetiles div.col-lg-3.col-md-3.col-sm-3.col-xs-6{
                 padding: 0px;
             }
+
+            .row {
+                display: flex;
+                margin: 10pt;
+            }      
+
+            .column {
+                flex: 25%;
+                padding: 5px;
+                margin: 10pt;
+            }
+
+            .hero-unit {
+                text-align: left;
+                border-radius: 25px;
+                border: 2px solid #6495ED;
+                padding: 20px;
+                width: 500px;
+                height: 100px;
+                vertical-align: middle;
+            }
+
+            .body {
+                text-align: center;
+            }
         </style>
         
     </head>
@@ -21,11 +46,16 @@
                 <div class="navbar-nav"> 
                   <a class="nav-link active" aria-current="page" href="{{ url_for('inventory') }}">Inventory</a>
                   <a class="nav-link" href="{{ url_for('marketplace') }}">Marketplace</a>
-                  <a class="navbar-text"> Balance: {{balance}} </a>
                 </div>
                 {% endblock %}
             </div>
         </nav>
+
+        <div class="p-3 mb-2 bg-light text-dark">
+
+        <div class="hero-unit">
+            <h1>Balance: ${{balance}}.00</h1>
+        </div>
 
         <ul>
             {% set messages = get_flashed_messages() %}
@@ -36,7 +66,7 @@
 
         {% block body %}
         {% endblock %}
-  
+        </div>
     </body>
 </html>
 

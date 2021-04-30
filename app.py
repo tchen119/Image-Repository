@@ -6,7 +6,6 @@ app.config['SECRET_KEY'] = "TH15 15 4 53CR3T K3Y"
 
 @app.route('/', methods = ['GET', 'POST'])
 def inventory():
-    inventory_from_default = get_images_from_user(0)
     default_user_balance = get_user_balance(0)
 
     if request.method == 'POST':
@@ -27,13 +26,17 @@ def inventory():
             #add sold items to the marketplace
             add_image(get_image_filepath(id), 1, get_image_price(id), sellQuantity)
 
+        inventory_from_default = get_images_from_user(0)
+        default_user_balance = get_user_balance(0)
+
         return render_template('inventory.html', inventory = inventory_from_default, balance = default_user_balance)
     else:
+        inventory_from_default = get_images_from_user(0)
+
         return render_template('inventory.html', inventory = inventory_from_default, balance = default_user_balance)
 
 @app.route('/marketplace', methods = ['GET', 'POST'])
 def marketplace():
-    marketplace_items = get_marketplace_images(0)
     default_user_balance = get_user_balance(0)
 
     if request.method == 'POST':
@@ -51,14 +54,15 @@ def marketplace():
             set_image_to_quantity(id, originalQuantity - buyQuantity)
             set_balance(0, default_user_balance - buyQuantity * imagePrice)
             #add bought items to inventory
-            inventory_id = get_inventory_quantity(0, get_image_filepath(id))
-            if inventory_id == -1:
-                add_image(get_image_filepath(id), 0, get_image_price(id), get_image_quantity(id))
-            else:
-                set_image_to_quantity(id, get_image_quantity(inventory_id) + buyQuantity)
+            add_image(get_image_filepath(id), 0, get_image_price(id), buyQuantity)
+
+        marketplace_items = get_marketplace_images(0)
+        default_user_balance = get_user_balance(0)
 
         return render_template('marketplace.html', marketplace = marketplace_items, balance = default_user_balance)
     else:
+        marketplace_items = get_marketplace_images(0)
+        
         return render_template('marketplace.html', marketplace = marketplace_items, balance = default_user_balance)
 
 if __name__ == '__main__':

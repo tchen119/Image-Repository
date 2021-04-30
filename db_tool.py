@@ -129,7 +129,7 @@ def get_images_from_user(user_id):
 
     image_list = {}
 
-    command = "SELECT * FROM images WHERE images.user_id = %d;" % (user_id)
+    command = "SELECT * FROM images WHERE images.user_id = %d AND images.quantity != 0;" % (user_id)
     for row in c.execute(command):
         image = {}
         image['filepath'] = row[1]
@@ -149,7 +149,7 @@ def get_marketplace_images(user_id):
 
     image_list = {}
 
-    command = "SELECT * FROM images WHERE images.user_id != %d;" % (user_id)
+    command = "SELECT * FROM images WHERE images.user_id != %d AND images.quantity != 0;" % (user_id)
     for row in c.execute(command):
         image = {}
         image['filepath'] = row[1]
@@ -213,6 +213,17 @@ if __name__ == "__main__":
     user_id2 = add_user('Belts Seller', 100)
     user_id3 = add_user('Tshirt Seller', 100)
 
-    add_image('/static/img/socks_5_pair.jpg', default_user_id, 5.00, 2)
-    add_image('/static/img/belt_with_rings.jpg', user_id2, 10.00, 5)
-    add_image('/static/img/grey_t-shirt.jpg', user_id3, 3.00, 10)
+    add_image('/static/img/socks_5_pair.jpg', default_user_id, 5.00, 1)
+    add_image('/static/img/belt_with_rings.jpg', user_id2, 10.00, 1)
+    add_image('/static/img/grey_t-shirt.jpg', user_id3, 3.00, 1)
+    add_image('/static/img/crocs.jpg', default_user_id, 30.00, 1)
+    add_image('/static/img/crocs.jpg', user_id2, 30.00, 1)
+    add_image('/static/img/blanket.jpg', default_user_id, 20.00, 1)
+    add_image('/static/img/converse.jpg', user_id2, 50.00, 1)
+    add_image('/static/img/jordans.jpeg', default_user_id, 90.00, 1)
+    add_image('/static/img/hoodie.jpg', user_id2, 20.00, 1)
+    add_image('/static/img/airfryer.jpg', default_user_id, 25.00, 1)
+    add_image('/static/img/blender.jpg', user_id2, 40.00, 1)
+    add_image('/static/img/electricstove.jpg', default_user_id, 40.00, 1)
+    add_image('/static/img/mixer.jpg', user_id2, 29.00, 1)
+    add_image('/static/img/patagonia.jpg', default_user_id, 100.00, 1)
