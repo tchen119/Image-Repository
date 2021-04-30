@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+
+{% block body %}
+
+<div class="row">
+    <div class="column"> 
+        {% for item, values in inventory.items() %}
+        <img src="{{ values['filepath'] }}" height="200" width="200">
+        <p>Inventory {{values['quantity']}}</p>
+        <p>Price {{values['price']}}</p>
+        <form method="POST">
+            <label for="sellQuantity">Quantity:</label>
+            <input type="number" id="sellQuantity" name="sellQuantity"><br><br>
+            <input type="hidden" id="id" name="id" value="{{item}}">
+            <input type="submit" value="Sell">
+        </form> 
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
