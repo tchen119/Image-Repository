@@ -34,6 +34,7 @@
             .body {
                 text-align: center;
             }
+
         </style>
         
     </head>
@@ -57,12 +58,12 @@
             <h1>Balance: ${{balance}}.00</h1>
         </div>
 
-        <ul>
+        <div class="flash">
             {% set messages = get_flashed_messages() %}
             {% for message in messages %}
-            <li>{{ message }}</li>
+            <p>{{ message }}</p>
             {% endfor %}
-        </ul>
+        </div>
 
         {% block body %}
         {% endblock %}

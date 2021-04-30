@@ -50,11 +50,13 @@ def marketplace():
             buyQuantity = int(request.form['buyQuantity'])
 
         #update quantity if input is valid
-        if (buyQuantity <= originalQuantity and originalQuantity >= 0):
+        if (buyQuantity <= originalQuantity and originalQuantity >= 0 and imagePrice < default_user_balance):
             set_image_to_quantity(id, originalQuantity - buyQuantity)
             set_balance(0, default_user_balance - buyQuantity * imagePrice)
             #add bought items to inventory
             add_image(get_image_filepath(id), 0, get_image_price(id), buyQuantity)
+        else:
+            flash("Not enough money to purchase this item.")
 
         marketplace_items = get_marketplace_images(0)
         default_user_balance = get_user_balance(0)
