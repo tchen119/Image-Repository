@@ -50,7 +50,7 @@ def get_image_price(image_id):
     c = db.cursor()
 
     price = 0
-    
+
     command = "SELECT price FROM images WHERE images.image_id = %d;" % (image_id) 
     for row in c.execute(command):
         price = row[0]
@@ -80,6 +80,8 @@ def get_image_quantity(image_id):
 def get_image_filepath(image_id):
     db = sqlite3.connect("app.db")
     c = db.cursor()
+
+    filepath = ""
 
     command = "SELECT filepath FROM images WHERE images.image_id = %d;" % (image_id) 
     for row in c.execute(command):
@@ -210,6 +212,20 @@ def remove_image(image_id):
     c = db.cursor()
 
     command = "DELETE FROM images WHERE image_id = %d" % (image_id)
+    c.execute(command)
+
+    db.commit()
+    db.close()
+
+# remove tables
+def remove_tables():
+    db = sqlite3.connect("app.db")
+    c = db.cursor()
+
+    command = "DROP TABLE images;"
+    c.execute(command)
+
+    command = "DROP TABLE users;"
     c.execute(command)
 
     db.commit()
