@@ -11,6 +11,6 @@ In this application, you will start off with a set of inventory items and $100. 
 
 # Image of the Application
 
-<img width="1115" alt="Screen Shot 2021-05-01 at 4 39 58 AM" src="https://user-images.githubusercontent.com/67655719/116776627-59b6af80-aa37-11eb-8afa-d8b0fb7b4906.png">
+<img width="500" height="400" alt="Screen Shot 2021-05-01 at 4 39 58 AM" src="https://user-images.githubusercontent.com/67655719/116776627-59b6af80-aa37-11eb-8afa-d8b0fb7b4906.png">
 
 # Enjoy!
