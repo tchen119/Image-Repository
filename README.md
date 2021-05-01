@@ -3,7 +3,7 @@
 # Instructions
 1. Clone the repository.
 2. Open terminal and navigate to the repository.
-3. Run 'python3 app.py' in the terminal.
+3. Run 'python3 app.py' in the terminal. (Have python3 installed)
 4. On a browser, head to 'localhost:5000'.
 
 # Desription
