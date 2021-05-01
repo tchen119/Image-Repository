@@ -9,17 +9,20 @@
 
 {% block body %}
 
-<div class="row"> 
+<div class="row row-cols-1 row-cols-md-4 g-4">
     {% for item, values in marketplace.items() %}
-    <div class="column">             
-        <img src="{{ values['filepath'] }}" height="200" width="200">
-
-        <p>Price: ${{values['price']}}0</p>
-        <form method="POST">
-            <input type="hidden" id="buyQuantity" name="buyQuantity" value="1">
-            <input type="hidden" id="id" name="id" value="{{item}}">
-            <button type="submit" class="btn btn-primary">Buy</button>
-        </form>   
+    <div class="col">
+        <div class="card d-flex flex-column">
+            <img src="{{ values['filepath'] }}" class="card-img-top" alt="item">
+            <h5 class="card-title">${{values['price']}}0</h5>
+            <form method="POST">
+                <div class="card-body">
+                    <input type="hidden" id="buyQuantity" name="buyQuantity" value="1">                    
+                    <input type="hidden" id="id" name="id" value="{{item}}">  
+                    <button type="submit" style="margin-top: auto;" class="align-self btn btn-dark btn-lg btn-block">Buy</button>
+                </div>
+            </form>
+        </div>
     </div>
     {% endfor %}
 </div>

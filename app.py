@@ -9,7 +9,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = "TH15 15 4 53CR3T K3Y"
 app.config['UPLOAD'] = UPLOAD
 
-
 @app.route('/', methods = ['GET', 'POST'])
 def inventory():
     default_user_balance = get_user_balance(0)
@@ -21,18 +20,15 @@ def inventory():
             originalQuantity = get_image_quantity(id)
             imagePrice = get_image_price(id)
         
-            sellQuantity = 0
-            #check for bad input
-            if request.form['sellQuantity'] != "":
-                sellQuantity = int(request.form['sellQuantity'])
-        
+            sellQuantity = 1
+
             #update quantity if input is valid
             if (sellQuantity <= originalQuantity and originalQuantity >= 0):
                 set_image_to_quantity(id, originalQuantity - sellQuantity)
                 set_balance(0, default_user_balance + sellQuantity * imagePrice)
                 #add sold items to the marketplace
                 add_image(get_image_filepath(id), 1, get_image_price(id), sellQuantity) 
-                #remove image from user
+                #remove unneeded rows from images table
                 if get_image_quantity(id) == 0:
                     remove_image(id)
 
@@ -41,15 +37,19 @@ def inventory():
                 flash('Please enter a price.')
             else:
                 file = request.files['file']
-                price = float(request.form['price'])
+                if request.form['price'] == "":
+                    flash("Please enter a price.") 
+                else:    
+                    price = float(request.form['price'])
 
-                if file.filename == '':
-                    flash('No selected file')
-                else:
-                    filename = secure_filename(file.filename)
-                    file.save(os.path.join(app.config['UPLOAD'], filename))
-                    add_image(UPLOAD + filename, 0, price, 1)
+                    if file.filename == '':
+                        flash('No selected file')
+                    else:
+                        filename = secure_filename(file.filename)
+                        file.save(os.path.join(app.config['UPLOAD'], filename))
+                        add_image(UPLOAD + filename, 0, price, 1)
 
+        default_user_balance = get_user_balance(0)
         inventory_from_default = get_images_from_user(0)
         return render_template('inventory.html', inventory = inventory_from_default, balance = default_user_balance)
     else:

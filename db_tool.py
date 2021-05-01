@@ -49,6 +49,8 @@ def get_image_price(image_id):
     db = sqlite3.connect("app.db")
     c = db.cursor()
 
+    price = 0
+    
     command = "SELECT price FROM images WHERE images.image_id = %d;" % (image_id) 
     for row in c.execute(command):
         price = row[0]

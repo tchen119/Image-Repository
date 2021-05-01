@@ -16,19 +16,9 @@
             }      
 
             .column {
-                flex: 25%;
+                flex: 20%;
                 padding: 5px;
                 margin: 10pt;
-            }
-
-            .hero-unit {
-                text-align: left;
-                border-radius: 25px;
-                border: 2px solid #6495ED;
-                padding: 20px;
-                width: 500px;
-                height: 100px;
-                vertical-align: middle;
             }
 
             .body {
@@ -36,18 +26,37 @@
             }
 
             .upload-file {
-                border-radius: 25px;
-                border: 2px solid #6495ED;
                 padding: 20px;
-                width: 500px;
-                height: 150px;
             }
+
+            .card-img-top {
+                width: 100%;
+                height: 20vw;
+                object-fit: contain;
+            }
+
+            .card-body {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .card {
+                margin: 0 auto;
+                float: none; 
+                margin-bottom: 10px; 
+                text-align: center;
+            }
+
+            .flash {
+                text-align: center;
+            }
+          
         </style>
         
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <a class="navbar-brand">Shopify Challenge</a>
                 {% block activenav %}
@@ -60,20 +69,18 @@
         </nav>
 
         <div class="p-3 mb-2 bg-light text-dark">
-
-            <div class="hero-unit">
-                <h1>Balance: ${{balance}}.00</h1>
+            <div class="card w-50">
+                <div class="card-body">
+                  <h2 class="card-title">Balance: ${{balance}}.00</h2>
+                </div>
             </div>
-
             <br>
-
             <div class="flash">
                 {% set messages = get_flashed_messages() %}
                 {% for message in messages %}
                 <p>{{ message }}</p>
                 {% endfor %}
             </div>
-
             {% block body %}
             {% endblock %}
         </div>
